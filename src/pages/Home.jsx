@@ -6,8 +6,8 @@ const slides = [
     renderLeftSupport: () => (
       <>
         <div className="thumbs">
-          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=100&q=80" alt="" />
-          <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=100&q=80" alt="" />
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy" />
         </div>
         <div className="bars-chart">
           <div className="bar-col"><div className="bar-fill" style={{height:"30%"}}></div><span>Aug</span></div>
@@ -20,7 +20,7 @@ const slides = [
     ),
     rightLabel: "Homes for sale", rightValue: "48 listings / 12 ready",
     renderRightSupport: () => (
-      <img className="mini-house-top" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=240&q=80" alt="" />
+      <img className="mini-house-top" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=240&q=80" alt="" loading="lazy" />
     )
   },
   {
@@ -36,7 +36,7 @@ const slides = [
     ),
     rightLabel: "Average days to close", rightValue: "41",
     renderRightSupport: () => (
-      <img className="mini-house-top" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=240&q=80" alt="" />
+      <img className="mini-house-top" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=240&q=80" alt="" loading="lazy" />
     )
   },
   {
@@ -54,15 +54,15 @@ const slides = [
     ),
     rightLabel: "Plots live", rightValue: "27",
     renderRightSupport: () => (
-      <img className="mini-house-top" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=240&q=80" alt="Aerial" />
+      <img className="mini-house-top" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=240&q=80" alt="Aerial" loading="lazy" />
     )
   },
   {
     leftLabel: "Avg. residence value", leftValue: "₹1.85 Cr",
     renderLeftSupport: () => (
       <div className="thumbs" style={{position: 'relative', top: 0, left: 0, marginTop: '24px'}}>
-        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=100&q=80" alt="" />
-        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=100&q=80" alt="" />
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy" />
       </div>
     ),
     rightLabel: "NRI enquiries", rightValue: "64",
@@ -99,12 +99,12 @@ const slides = [
     leftLabel: "3 BHK ready", leftValue: "19",
     renderLeftSupport: () => (
       <div className="thumbs" style={{position: 'relative', top: 0, left: 0, marginTop: '24px'}}>
-        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=100&q=80" alt="Floor plan" />
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=100&q=80" alt="Floor plan" loading="lazy" />
       </div>
     ),
     rightLabel: "Villas & penthouses", rightValue: "08",
     renderRightSupport: () => (
-      <img className="mini-house-top" src="https://images.unsplash.com/photo-1576941089067-2de3c901e126?auto=format&fit=crop&w=240&q=80" alt="Pool villa" />
+      <img className="mini-house-top" src="https://images.unsplash.com/photo-1576941089067-2de3c901e126?auto=format&fit=crop&w=240&q=80" alt="Pool villa" loading="lazy" />
     )
   },
   {
@@ -115,8 +115,8 @@ const slides = [
     rightLabel: "Families placed", rightValue: "320+",
     renderRightSupport: () => (
       <div className="thumbs" style={{position: 'absolute', top: '32px', right: '32px', left: 'auto'}}>
-        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=100&q=80" alt="" />
-        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=100&q=80" alt="" />
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy" />
       </div>
     )
   },
@@ -124,7 +124,7 @@ const slides = [
     leftLabel: "Boutique commercial", leftValue: "11",
     renderLeftSupport: () => (
       <div className="thumbs" style={{position: 'relative', top: 0, left: 0, marginTop: '24px'}}>
-        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=100&q=80" alt="Office facade" />
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=100&q=80" alt="Office facade" loading="lazy" />
       </div>
     ),
     rightLabel: "Quoted rental yield", rightValue: "6.4%",
@@ -141,7 +141,7 @@ const slides = [
     leftLabel: "Handovers this year", leftValue: "37",
     renderLeftSupport: () => (
       <div className="thumbs" style={{position: 'relative', top: 0, left: 0, marginTop: '24px'}}>
-        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=100&q=80" alt="Keys" />
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=100&q=80" alt="Keys" loading="lazy" />
       </div>
     ),
     rightLabel: "Aftercare active", rightValue: "12 mo",
@@ -176,7 +176,7 @@ export default function Home() {
     <>
       <div className="hero" id="home">
       <div className="hero-grid">
-        <div>
+        <div className="hero-content">
           <p className="eyebrow">IT'S A LIFESTYLE</p>
           <h1>OPULENT<br />AREAS, ETERNAL<br />WORTH</h1>
           <div className="hero-actions">
@@ -185,7 +185,7 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-visual">
-          <img className="house" src="/house.jpg" alt="Sai Kripa luxury residence" style={{ mixBlendMode: 'darken' }} />
+          <img className="house" src="/house.jpg" alt="Sai Kripa luxury residence" style={{ mixBlendMode: 'darken' }} fetchpriority="high" />
           <div className="arc"></div>
         </div>
       </div>
@@ -247,7 +247,7 @@ export default function Home() {
         <div>
           <h3>Trusted Realty</h3>
           <div className="trust-card">
-            <img key={activeTab} src={tabImages[activeTab]} alt="Trusted property" className="fade-in-image" />
+            <img key={activeTab} src={tabImages[activeTab]} alt="Trusted property" className="fade-in-image" loading="lazy" />
             <div className="handshake">🤝</div>
           </div>
         </div>
@@ -312,7 +312,7 @@ export default function Home() {
       <div className="invest-grid">
         <article className="prop-mini">
           <h4>Profitable properties</h4>
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Commercial building" />
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Commercial building" loading="lazy" />
           <p className="meta">Commercial &nbsp; 12,0999</p>
         </article>
         <div className="invest-copy">
@@ -322,11 +322,11 @@ export default function Home() {
         </div>
         <article className="prop-mini">
           <h4>Property listing</h4>
-          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" alt="Apartment listing" />
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" alt="Apartment listing" loading="lazy" />
         </article>
       </div>
       <div className="wide-shot">
-        <img src="https://images.unsplash.com/photo-1600585153490-76fb20a32601?auto=format&fit=crop&w=1600&q=80" alt="Featured Sai Kripa home" />
+        <img src="https://images.unsplash.com/photo-1600585153490-76fb20a32601?auto=format&fit=crop&w=1600&q=80" alt="Featured Sai Kripa home" loading="lazy" />
       </div>
     </section>
 
@@ -335,20 +335,20 @@ export default function Home() {
       <p>Experience a seamless and trusted real estate journey with us.</p>
       <div className="disc-grid">
         <article className="disc-card">
-          <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80" alt="Premium home" />
+          <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80" alt="Premium home" loading="lazy" />
           <div className="body">
             <h4>Premium Homes</h4>
             <div className="dot"></div>
           </div>
         </article>
         <article className="disc-card">
-          <img src="https://images.unsplash.com/photo-1600047509782-20d39509f26d?auto=format&fit=crop&w=800&q=80" alt="Modern tower home" />
+          <img src="https://images.unsplash.com/photo-1600047509782-20d39509f26d?auto=format&fit=crop&w=800&q=80" alt="Modern tower home" loading="lazy" />
           <div className="body">
             <p className="meta">Discover premium real estate options in prime locations, modern living.</p>
           </div>
         </article>
         <article className="disc-card">
-          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" alt="Evening villa" />
+          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" alt="Evening villa" loading="lazy" />
           <div className="body">
             <h4>Profitable properties</h4>
             <p className="meta">Commercial &nbsp; 12,0999</p>

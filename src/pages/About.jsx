@@ -110,7 +110,7 @@ export default function About() {
       <h2 style={{"fontSize":"36px","letterSpacing":"-0.035em","marginBottom":"24px"}}>The room that represents you</h2>
       <div className="team">
         <article className="member">
-          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&q=80" alt="Abelia Rao" />
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=700&q=80" alt="Abelia Rao" loading="lazy" />
           <div className="body">
             <h3>Abelia Rao</h3>
             <p className="role">Principal advisor</p>

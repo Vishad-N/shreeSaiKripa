@@ -946,22 +946,110 @@ footer strong { color: #fff; font-family: "Montserrat", sans-serif; }
       background: #0f1117;
       color: #9aa0ad;
       text-align: center;
-      padding: 22px;
-      font-size: 13px;
     }
     footer strong { color: #fff; font-family: "Montserrat", sans-serif; }
+    
+    /* Mobile Nav Hidden on Desktop */
+    .menu-btn { display: none; }
+    .mobile-nav { display: none; }
 
-    @media (max-width: 980px) {
-      header, .hero, section, .living { padding-left: 20px; padding-right: 20px; }
-      header { flex-wrap: wrap; }
-      nav { order: 3; width: 100%; justify-content: space-between; }
-      .hero-grid, .living-grid, .metric-grid, .success-grid, .invest-grid, .disc-grid, .clients, .stats-bar {
-        grid-template-columns: 1fr;
-      }
-      .hero-visual { height: 340px; }
-      .hero-visual img.house { position: relative; width: 100%; height: 340px; right: 0; top: 0; mask-image: none; border-radius: 18px; }
-      .stats-bar { margin: 18px 16px 0; border-radius: 22px; }
-      .stats-copy { justify-self: start; }
-      .allocate-aside, .success-head { text-align: left; }
+    /* =========================================
+       RESPONSIVE BREAKPOINTS (Desktop-Down)
+       ========================================= */
+
+    /* TABLET: 768px - 1024px */
+    @media (max-width: 1024px) {
+      header, .page-hero, section, .living, footer { padding-left: 32px; padding-right: 32px; }
+      
+      .page-hero-grid { gap: 20px; }
+      .invest-grid, .disc-grid, .success-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: 1fr 1fr; }
+      
+      .clients { grid-template-columns: 1fr; text-align: center; }
+      .clients .client-photos { justify-content: center; }
+    }
+
+    /* MOBILE: < 768px */
+    @media (max-width: 767px) {
+      /* Base Resets & Typography */
+      header, .hero, section, footer { padding-left: 20px; padding-right: 20px; }
+      section { padding-top: 48px; padding-bottom: 48px; }
       .page { margin: 0; border-radius: 0; }
+      
+      /* Typography */
+      .hero h1 { font-size: clamp(36px, 10vw, 44px); line-height: 1.1; margin-bottom: 16px; }
+      h2 { font-size: 28px !important; }
+      p { font-size: 16px !important; line-height: 1.5; }
+      
+      /* Touch Targets */
+      .btn { min-height: 48px; width: 100%; justify-content: center; margin-bottom: 8px; }
+      
+      /* Header & Nav */
+      header { position: sticky; top: 0; z-index: 50; padding: 12px 20px; }
+      .header-right { gap: 8px; }
+      .header-right .btn { width: auto; min-height: 40px; padding: 6px 14px; font-size: 13px; margin: 0; }
+      
+      /* Desktop Nav hidden by default on mobile */
+      nav.desktop-nav { display: none; }
+      
+      /* Hamburger Menu Icon (CSS Only placeholder before React logic) */
+      .menu-btn { display: flex; flex-direction: column; gap: 5px; background: none; border: none; padding: 8px; z-index: 60; }
+      .menu-btn span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: 0.3s; }
+      
+      /* Mobile Nav Overlay */
+      .mobile-nav {
+        position: fixed; inset: 0; background: #fff; z-index: 40;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+        transform: translateY(-100%); transition: transform 0.4s ease;
+      }
+      .mobile-nav.open { transform: translateY(0); }
+      .mobile-nav a { font-size: 24px; font-weight: 600; }
+      
+      /* Hero Stack */
+      .hero-grid { grid-template-columns: 1fr; gap: 24px; min-height: auto; }
+      .hero-content { order: 1; }
+      .hero-actions { flex-direction: column; margin-top: 16px; }
+      .hero-visual { order: 2; height: auto; z-index: 1; }
+      .hero-visual img.house { position: relative; width: 100%; right: 0; top: 0; aspect-ratio: 4/3; height: auto; object-fit: cover; border-radius: 16px; -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%); mask-image: linear-gradient(to bottom, black 80%, transparent 100%); }
+      
+      /* Connected Dark Block (Stats Bar + Living) */
+      .stats-bar { margin: 16px 20px 0; padding: 24px 24px 12px; border-radius: 24px 24px 0 0; grid-template-columns: 1fr; gap: 24px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .living { margin: 0 20px 32px; padding: 24px 24px 32px; border-radius: 0 0 24px 24px; }
+      
+      /* Portfolio / Living Grid (Vertical Dashboard) */
+      .living-grid { grid-template-columns: 1fr; gap: 24px; }
+      .stats-blocks { grid-template-columns: 1fr; gap: 16px; }
+      .stats-counters { grid-template-columns: 1fr; gap: 16px; }
+      .chip-row { overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; flex-wrap: nowrap; }
+      .chip-row .chip { scroll-snap-align: start; white-space: nowrap; }
+      
+      /* Allocate Resources & Invest */
+      .allocate-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .allocate-aside { width: 100%; text-align: left; }
+      .metric-grid-two { grid-template-columns: 1fr; }
+      .metric-card.wide { grid-template-columns: 1fr; }
+      .invest-grid { grid-template-columns: 1fr; }
+      .invest-copy { text-align: center; padding: 24px 0; }
+      .invest-copy p { margin: 12px auto 20px; }
+      .wide-shot { height: 200px; }
+      .wide-shot img { height: 200px; aspect-ratio: 16/9; }
+      
+      /* Discover */
+      .disc-grid { grid-template-columns: 1fr; }
+      .disc-card img { aspect-ratio: 16/10; height: auto; }
+      .disc-card .body { padding: 20px; }
+      
+      /* Clients / Testimonials */
+      .clients { padding-bottom: 40px; text-align: left; }
+      .client-photos { grid-template-columns: 1fr 1fr; }
+      .cta-dark { padding: 32px 24px; }
+      
+      /* Pages */
+      .about-hero, .vision-grid, .story-content, .team-grid { grid-template-columns: 1fr; }
+      .services-grid, .process-steps { grid-template-columns: 1fr; }
+      .faq-container { grid-template-columns: 1fr; }
+      
+      /* Footer */
+      footer { flex-direction: column; gap: 24px; padding: 40px 20px; }
+      .footer-center { order: -1; }
     }
