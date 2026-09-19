@@ -1,4 +1,18 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 }
+  }
+};
 
 const slides = [
   {
@@ -172,70 +186,108 @@ export default function Home() {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+  
+  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const opacityHero = useTransform(scrollYProgress, [0, 1], [1, 0]);
+
   return (
     <>
-      <div className="hero" id="home">
-      <div className="hero-grid">
-        <div className="hero-content">
-          <p className="eyebrow">IT'S A LIFESTYLE</p>
-          <h1>OPULENT<br />AREAS, ETERNAL<br />WORTH</h1>
-          <div className="hero-actions">
-            <a className="btn btn-primary" href="#discover">Discover Now</a>
-            <a className="btn btn-ghost" href="#listings">See Details</a>
-          </div>
+    <div ref={containerRef}>
+      <motion.div 
+        className="hero" 
+        id="home"
+        style={{ y: yBg, opacity: opacityHero }}
+      >
+        <div className="hero-grid">
+          <motion.div 
+            className="hero-content"
+            initial="hidden"
+            animate="visible"
+            variants={staggerContainer}
+          >
+            <motion.p className="eyebrow" variants={fadeInUp}>IT'S A LIFESTYLE</motion.p>
+            <motion.h1 variants={fadeInUp}>OPULENT<br />AREAS, ETERNAL<br />WORTH</motion.h1>
+            <motion.div className="hero-actions" variants={fadeInUp}>
+              <a className="btn btn-primary" href="#discover">Discover Now</a>
+              <a className="btn btn-ghost" href="#listings">See Details</a>
+            </motion.div>
+          </motion.div>
+          <motion.div 
+            className="hero-visual"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          >
+            <img className="house" src="/house.png" alt="Sai Kripa luxury residence" fetchpriority="high" />
+          </motion.div>
         </div>
-        <div className="hero-visual">
-          <img className="house" src="/house.jpg" alt="Sai Kripa luxury residence" style={{ mixBlendMode: 'darken' }} fetchpriority="high" />
-          <div className="arc"></div>
-        </div>
-      </div>
+      </motion.div>
     </div>
 
-    <div className="stats-bar">
-      <div className="stats-group">
-        <p className="eyebrow" style={{color: '#9aa1b2', marginBottom: '24px'}}>PORTFOLIO MIX</p>
-        <div className="stats-blocks" style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px'}}>
-          <div className="stat-block">
-            <h4>Residential</h4>
-            <div className="stat-num">65%</div>
-            <div className="bar"><span style={{width:"65%"}}></span></div>
-          </div>
-          <div className="stat-block">
-            <h4>Land</h4>
-            <div className="stat-num">25%</div>
-            <div className="bar"><span style={{width:"25%"}}></span></div>
-          </div>
-          <div className="stat-block">
-            <h4>Industrial</h4>
-            <div className="stat-num">10%</div>
-            <div className="bar"><span style={{width:"10%"}}></span></div>
-          </div>
-        </div>
-      </div>
-      <div className="stats-group">
-        <p className="eyebrow" style={{color: '#9aa1b2', marginBottom: '24px'}}>LIVE INVENTORY</p>
-        <div className="stats-counters" style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', height: '100%', alignItems: 'start'}}>
-          <div className="counter-item">
-            <span className="count">12</span>
-            <span className="label">Homes Ready</span>
-          </div>
-          <div className="counter-item">
-            <span className="count">8</span>
-            <span className="label">Plots Available</span>
-          </div>
-          <div className="counter-item">
-            <span className="count" style={{color: '#4ade80'}}>✓</span>
-            <span className="label">RERA Approved</span>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <motion.div 
+        className="stats-bar"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer}
+      >
+        <div className="stats-group">
+          <motion.p className="eyebrow" style={{color: '#9aa1b2', marginBottom: '24px'}} variants={fadeInUp}>PORTFOLIO MIX</motion.p>
+          <div className="stats-blocks" style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px'}}>
+            <motion.div className="stat-block" variants={fadeInUp}>
+              <h4>Residential</h4>
+              <div className="stat-num">65%</div>
+              <div className="bar"><span style={{width:"65%"}}></span></div>
+            </motion.div>
+            <motion.div className="stat-block" variants={fadeInUp}>
+              <h4>Land</h4>
+              <div className="stat-num">25%</div>
+              <div className="bar"><motion.span initial={{width: 0}} whileInView={{width: "25%"}} transition={{duration: 1, delay: 0.3}}></motion.span></div>
+            </motion.div>
+            <motion.div className="stat-block" variants={fadeInUp}>
+              <h4>Industrial</h4>
+              <div className="stat-num">10%</div>
+              <div className="bar"><motion.span initial={{width: 0}} whileInView={{width: "10%"}} transition={{duration: 1, delay: 0.5}}></motion.span></div>
+            </motion.div>
           </div>
         </div>
-      </div>
-    </div>
+        <div className="stats-group">
+          <motion.p className="eyebrow" style={{color: '#9aa1b2', marginBottom: '24px'}} variants={fadeInUp}>LIVE INVENTORY</motion.p>
+          <div className="stats-counters" style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', height: '100%', alignItems: 'start'}}>
+            <motion.div className="counter-item" variants={fadeInUp} whileHover={{ y: -5, scale: 1.05 }}>
+              <span className="count">12</span>
+              <span className="label">Homes Ready</span>
+            </motion.div>
+            <motion.div className="counter-item" variants={fadeInUp} whileHover={{ y: -5, scale: 1.05 }}>
+              <span className="count">8</span>
+              <span className="label">Plots Available</span>
+            </motion.div>
+            <motion.div className="counter-item" variants={fadeInUp} whileHover={{ y: -5, scale: 1.05 }}>
+              <span className="count" style={{color: '#4ade80'}}>✓</span>
+              <span className="label">RERA Approved</span>
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
 
-    <section className="living" id="about">
-      <h2>Intelligent Living<br />Begins Now</h2>
-      <p>Experience refined living through thoughtfully crafted properties that combine comfort.</p>
+      <motion.section 
+        className="living" 
+        id="about"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={staggerContainer}
+      >
+      <motion.h2 variants={fadeInUp}>Intelligent Living<br />Begins Now</motion.h2>
+      <motion.p variants={fadeInUp}>Experience refined living through thoughtfully crafted properties that combine comfort.</motion.p>
       <div className="living-grid">
-        <div>
+        <motion.div variants={fadeInUp}>
           <h3>Luxury Spaces</h3>
           <p className="desc">Curated environments designed for elegance and everyday ease.</p>
           <div className="chip-row">
@@ -243,34 +295,43 @@ export default function Home() {
             <button className={`chip ${activeTab === 'Realty' ? 'on' : ''}`} onClick={() => setActiveTab('Realty')}>Realty</button>
             <button className={`chip ${activeTab === 'Commercial space' ? 'on' : ''}`} onClick={() => setActiveTab('Commercial space')}>Commercial space</button>
           </div>
-        </div>
-        <div>
+        </motion.div>
+        <motion.div variants={fadeInUp}>
           <h3>Trusted Realty</h3>
-          <div className="trust-card">
+          <motion.div className="trust-card" whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
             <img key={activeTab} src={tabImages[activeTab]} alt="Trusted property" className="fade-in-image" loading="lazy" />
             <div className="handshake">🤝</div>
-          </div>
-        </div>
-        <div>
+          </motion.div>
+        </motion.div>
+        <motion.div variants={fadeInUp}>
           <h3>Residential Property</h3>
           <div className="stack" style={{"marginTop":"16px"}}>
             <span className="pill">Apartments</span>
             <span className="pill">Investment</span>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
+    </div>
 
-    <section className="allocate" id="services">
+
+    <motion.section 
+      className="allocate" 
+      id="services"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+    >
       <div className="allocate-head">
-        <div>
+        <motion.div variants={fadeInUp}>
           <span className="section-kicker" style={{borderRadius: '999px', padding: '10px 24px'}}>Land for sale</span>
-        </div>
-        <h2>Allocate Resources<br/>to Important Areas</h2>
-        <p className="allocate-aside">We help you discover properties<br/>with real value—designed for<br/>living, built for growth</p>
+        </motion.div>
+        <motion.h2 variants={fadeInUp}>Allocate Resources<br/>to Important Areas</motion.h2>
+        <motion.p className="allocate-aside" variants={fadeInUp}>We help you discover properties<br/>with real value—designed for<br/>living, built for growth</motion.p>
       </div>
 
-      <div className="metric-grid-two slide-fade-in" key={currentSlide}>
+      <motion.div className="metric-grid-two slide-fade-in" key={currentSlide} variants={fadeInUp}>
         <article className="metric-card">
           <div className="metric-sub-left">
             <div className="label">{slides[currentSlide].leftLabel}</div>
@@ -293,88 +354,109 @@ export default function Home() {
             <div className="big-idx">{String(currentSlide + 1).padStart(2, '0')}</div>
           </div>
         </article>
-      </div>
+      </motion.div>
 
-      <div className="pager-new">
+      <motion.div className="pager-new" variants={fadeInUp}>
         <div><strong>{String(currentSlide + 1).padStart(2, '0')}</strong><span>/09</span></div>
         <div className="pager-arrows">
           <button className="arr-left" onClick={prevSlide}>&lt;</button>
           <button className="arr-right" onClick={nextSlide}>&gt;</button>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
 
-    <section className="invest" id="listings">
-      <div className="top-pills">
+    <motion.section 
+      className="invest" 
+      id="listings"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+    >
+      <motion.div className="top-pills" variants={fadeInUp}>
         <span className="on">📊 Property insights</span>
         <span>🏠 Homes for sale</span>
-      </div>
+      </motion.div>
       <div className="invest-grid">
-        <article className="prop-mini">
+        <motion.article className="prop-mini" variants={fadeInUp} whileHover={{ y: -5 }}>
           <h4>Profitable properties</h4>
           <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Commercial building" loading="lazy" />
           <p className="meta">Commercial &nbsp; 12,0999</p>
-        </article>
-        <div className="invest-copy">
+        </motion.article>
+        <motion.div className="invest-copy" variants={fadeInUp}>
           <h2>Invest Smart<br />Live Better</h2>
           <p>Find properties that match your lifestyle, from cozy homes.</p>
-          <a className="round-btn" href="#discover" aria-label="Continue">→</a>
-        </div>
-        <article className="prop-mini">
+          <motion.a className="round-btn" href="#discover" aria-label="Continue" whileHover={{ scale: 1.1 }}>→</motion.a>
+        </motion.div>
+        <motion.article className="prop-mini" variants={fadeInUp} whileHover={{ y: -5 }}>
           <h4>Property listing</h4>
           <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" alt="Apartment listing" loading="lazy" />
-        </article>
+        </motion.article>
       </div>
-      <div className="wide-shot">
+      <motion.div className="wide-shot" variants={fadeInUp}>
         <img src="https://images.unsplash.com/photo-1600585153490-76fb20a32601?auto=format&fit=crop&w=1600&q=80" alt="Featured Sai Kripa home" loading="lazy" />
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
 
-    <section className="discover" id="discover">
-      <h2>Discover Your Perfect Property</h2>
-      <p>Experience a seamless and trusted real estate journey with us.</p>
+    <motion.section 
+      className="discover" 
+      id="discover"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+    >
+      <motion.h2 variants={fadeInUp}>Discover Your Perfect Property</motion.h2>
+      <motion.p variants={fadeInUp}>Experience a seamless and trusted real estate journey with us.</motion.p>
       <div className="disc-grid">
-        <article className="disc-card">
+        <motion.article className="disc-card" variants={fadeInUp} whileHover={{ scale: 1.03 }}>
           <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80" alt="Premium home" loading="lazy" />
           <div className="body">
             <h4>Premium Homes</h4>
             <div className="dot"></div>
           </div>
-        </article>
-        <article className="disc-card">
+        </motion.article>
+        <motion.article className="disc-card" variants={fadeInUp} whileHover={{ scale: 1.03 }}>
           <img src="https://images.unsplash.com/photo-1600047509782-20d39509f26d?auto=format&fit=crop&w=800&q=80" alt="Modern tower home" loading="lazy" />
           <div className="body">
             <p className="meta">Discover premium real estate options in prime locations, modern living.</p>
           </div>
-        </article>
-        <article className="disc-card">
+        </motion.article>
+        <motion.article className="disc-card" variants={fadeInUp} whileHover={{ scale: 1.03 }}>
           <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" alt="Evening villa" loading="lazy" />
           <div className="body">
             <h4>Profitable properties</h4>
             <p className="meta">Commercial &nbsp; 12,0999</p>
           </div>
-        </article>
+        </motion.article>
       </div>
-    </section>
+    </motion.section>
 
-    <section className="clients" id="faqs">
-      <div>
+    <motion.section 
+      className="clients" 
+      id="faqs"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={staggerContainer}
+    >
+      <motion.div variants={fadeInUp}>
         <h2>What Our Clients Say</h2>
         <p>We provide comprehensive real estate services including property buying.</p>
         <div className="stars">★★★★☆</div>
         <div className="client-label">Client</div>
-      </div>
-      <div className="client-photos">
+      </motion.div>
+      <motion.div className="client-photos" variants={fadeInUp}>
         <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=700&q=80" alt="Living room" />
         <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=700&q=80" alt="Interior seating" />
-      </div>
-      <aside className="cta-dark" id="contact">
+      </motion.div>
+      <motion.aside className="cta-dark" id="contact" variants={fadeInUp} whileHover={{ scale: 1.02 }}>
         <span className="pill soft">Learn More</span>
         <h4>Guided closings</h4>
         <p>Our agents will guide you through property research, negotiations, and closing process.</p>
         <a className="btn btn-outline" href="mailto:hello@saikripa.example">Explore More →</a>
-      </aside>
-    </section>
+      </motion.aside>
+    </motion.section>
     </>
   );
 }

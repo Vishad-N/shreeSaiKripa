@@ -1,4 +1,15 @@
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+};
 
 const faqsData = [
   { id: 1, cat: 'buy', q: 'Do you only handle luxury inventory?', a: 'No. We are selective, not exclusive to penthouses. First homes, plotted land, and boutique commercial sit beside villa mandates — the filter is quality of title and long-term worth, not a price floor.' },
@@ -25,53 +36,100 @@ export default function FAQs() {
 
   return (
     <>
-      <div className="page-hero">
+      <motion.div 
+        className="page-hero"
+        initial="hidden"
+        animate="visible"
+        variants={staggerContainer}
+      >
         <div className="page-hero-grid">
           <div>
-            <p className="eyebrow">ANSWERS FIRST</p>
-            <h1>CLEAR<br />QUESTIONS.<br />CALM REPLIES.</h1>
-            <p className="lead">Buying or selling should not feel like a second job. These are the questions clients ask before they walk a home with us.</p>
-            <div className="hero-actions">
+            <motion.p className="eyebrow" variants={fadeInUp}>ANSWERS FIRST</motion.p>
+            <motion.h1 variants={fadeInUp}>CLEAR<br />QUESTIONS.<br />CALM REPLIES.</motion.h1>
+            <motion.p className="lead" variants={fadeInUp}>Buying or selling should not feel like a second job. These are the questions clients ask before they walk a home with us.</motion.p>
+            <motion.div className="hero-actions" variants={fadeInUp}>
               <a className="btn btn-primary" href="#list">Read FAQs</a>
               <a className="btn btn-ghost" href="/services">See services</a>
-            </div>
+            </motion.div>
           </div>
-          <div className="page-hero-visual">
+          <motion.div className="page-hero-visual" variants={fadeInUp}>
             <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80" alt="Calm interior" />
-            <div className="arc"></div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      <section id="list">
+      <motion.section 
+        id="list"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={staggerContainer}
+      >
         <div className="faq-wrap">
-          <div className="faq-filters" role="tablist">
+          <motion.div className="faq-filters" role="tablist" variants={fadeInUp}>
             <button className={filter === 'all' ? "on" : ""} onClick={() => setFilter('all')}>All</button>
             <button className={filter === 'buy' ? "on" : ""} onClick={() => setFilter('buy')}>Buying</button>
             <button className={filter === 'sell' ? "on" : ""} onClick={() => setFilter('sell')}>Selling</button>
             <button className={filter === 'legal' ? "on" : ""} onClick={() => setFilter('legal')}>Legal</button>
             <button className={filter === 'fees' ? "on" : ""} onClick={() => setFilter('fees')}>Fees</button>
-          </div>
+          </motion.div>
 
-          {filteredFaqs.map((faq) => (
-            <article key={faq.id} className={`faq-item ${openId === faq.id ? 'open' : ''}`}>
-              <button className="faq-q" onClick={() => toggleFaq(faq.id)}>
-                {faq.q}
-                <span className="plus">{openId === faq.id ? '−' : '+'}</span>
-              </button>
-              <div className="faq-a">{faq.a}</div>
-            </article>
-          ))}
+          <motion.div layout className="faq-list-container">
+            <AnimatePresence mode="popLayout">
+              {filteredFaqs.map((faq) => (
+                <motion.article 
+                  key={faq.id} 
+                  className={`faq-item ${openId === faq.id ? 'open' : ''}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  layout
+                >
+                  <button className="faq-q" onClick={() => toggleFaq(faq.id)}>
+                    {faq.q}
+                    <motion.span 
+                      className="plus"
+                      animate={{ rotate: openId === faq.id ? 180 : 0 }}
+                    >
+                      {openId === faq.id ? '−' : '+'}
+                    </motion.span>
+                  </button>
+                  <AnimatePresence>
+                    {openId === faq.id && (
+                      <motion.div 
+                        className="faq-a"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        style={{ overflow: 'hidden' }}
+                      >
+                        {faq.a}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.article>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      <div className="cta-band" id="contact">
+      <motion.div 
+        className="cta-band" 
+        id="contact"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+        variants={fadeInUp}
+      >
         <div>
           <h2>Still deciding?</h2>
           <p>Write to us with the city and the decision you are trying to make. A principal replies within a working day.</p>
         </div>
         <a className="btn btn-primary" href="mailto:hello@saikripa.example">Ask Sai Kripa</a>
-      </div>
+      </motion.div>
     </>
   );
 }
