@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import AnimatedText from '../components/AnimatedCounter';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -16,12 +17,12 @@ const staggerContainer = {
 
 const slides = [
   {
-    leftLabel: "Trusted Realty", leftValue: "300+",
+    leftLabel: "Trusted Realty", leftValue: "400+",
     renderLeftSupport: () => (
       <>
         <div className="thumbs">
-          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy" />
-          <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=100&q=80" alt="" />
+          <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=100&q=80" alt="" />
         </div>
         <div className="bars-chart">
           <div className="bar-col"><div className="bar-fill" style={{height:"30%"}}></div><span>Aug</span></div>
@@ -34,7 +35,7 @@ const slides = [
     ),
     rightLabel: "Homes for sale", rightValue: "48 listings / 12 ready",
     renderRightSupport: () => (
-      <img className="mini-house-top" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=240&q=80" alt="" loading="lazy" />
+      <img className="mini-house-top" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=240&q=80" alt="" />
     )
   },
   {
@@ -50,7 +51,7 @@ const slides = [
     ),
     rightLabel: "Average days to close", rightValue: "41",
     renderRightSupport: () => (
-      <img className="mini-house-top" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=240&q=80" alt="" loading="lazy" />
+      <img className="mini-house-top" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=240&q=80" alt="" />
     )
   },
   {
@@ -68,15 +69,15 @@ const slides = [
     ),
     rightLabel: "Plots live", rightValue: "27",
     renderRightSupport: () => (
-      <img className="mini-house-top" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=240&q=80" alt="Aerial" loading="lazy" />
+      <img className="mini-house-top" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=240&q=80" alt="Aerial" />
     )
   },
   {
     leftLabel: "Avg. residence value", leftValue: "₹1.85 Cr",
     renderLeftSupport: () => (
       <div className="thumbs" style={{position: 'relative', top: 0, left: 0, marginTop: '24px'}}>
-        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy" />
-        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=100&q=80" alt="" />
+        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=100&q=80" alt="" />
       </div>
     ),
     rightLabel: "NRI enquiries", rightValue: "64",
@@ -113,12 +114,12 @@ const slides = [
     leftLabel: "3 BHK ready", leftValue: "19",
     renderLeftSupport: () => (
       <div className="thumbs" style={{position: 'relative', top: 0, left: 0, marginTop: '24px'}}>
-        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=100&q=80" alt="Floor plan" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=100&q=80" alt="Floor plan" />
       </div>
     ),
     rightLabel: "Villas & penthouses", rightValue: "08",
     renderRightSupport: () => (
-      <img className="mini-house-top" src="https://images.unsplash.com/photo-1576941089067-2de3c901e126?auto=format&fit=crop&w=240&q=80" alt="Pool villa" loading="lazy" />
+      <img className="mini-house-top" src="https://images.unsplash.com/photo-1576941089067-2de3c901e126?auto=format&fit=crop&w=240&q=80" alt="Pool villa" />
     )
   },
   {
@@ -129,8 +130,8 @@ const slides = [
     rightLabel: "Families placed", rightValue: "320+",
     renderRightSupport: () => (
       <div className="thumbs" style={{position: 'absolute', top: '32px', right: '32px', left: 'auto'}}>
-        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy" />
-        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=100&q=80" alt="" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=100&q=80" alt="" />
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=100&q=80" alt="" />
       </div>
     )
   },
@@ -138,7 +139,7 @@ const slides = [
     leftLabel: "Boutique commercial", leftValue: "11",
     renderLeftSupport: () => (
       <div className="thumbs" style={{position: 'relative', top: 0, left: 0, marginTop: '24px'}}>
-        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=100&q=80" alt="Office facade" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=100&q=80" alt="Office facade" />
       </div>
     ),
     rightLabel: "Quoted rental yield", rightValue: "6.4%",
@@ -155,7 +156,7 @@ const slides = [
     leftLabel: "Handovers this year", leftValue: "37",
     renderLeftSupport: () => (
       <div className="thumbs" style={{position: 'relative', top: 0, left: 0, marginTop: '24px'}}>
-        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=100&q=80" alt="Keys" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=100&q=80" alt="Keys" />
       </div>
     ),
     rightLabel: "Aftercare active", rightValue: "12 mo",
@@ -242,17 +243,17 @@ export default function Home() {
           <div className="stats-blocks" style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px'}}>
             <motion.div className="stat-block" variants={fadeInUp}>
               <h4>Residential</h4>
-              <div className="stat-num">65%</div>
+              <div className="stat-num"><AnimatedText text="65%" /></div>
               <div className="bar"><span style={{width:"65%"}}></span></div>
             </motion.div>
             <motion.div className="stat-block" variants={fadeInUp}>
               <h4>Land</h4>
-              <div className="stat-num">25%</div>
+              <div className="stat-num"><AnimatedText text="25%" /></div>
               <div className="bar"><motion.span initial={{width: 0}} whileInView={{width: "25%"}} transition={{duration: 1, delay: 0.3}}></motion.span></div>
             </motion.div>
             <motion.div className="stat-block" variants={fadeInUp}>
               <h4>Industrial</h4>
-              <div className="stat-num">10%</div>
+              <div className="stat-num"><AnimatedText text="10%" /></div>
               <div className="bar"><motion.span initial={{width: 0}} whileInView={{width: "10%"}} transition={{duration: 1, delay: 0.5}}></motion.span></div>
             </motion.div>
           </div>
@@ -261,11 +262,11 @@ export default function Home() {
           <motion.p className="eyebrow" style={{color: '#9aa1b2', marginBottom: '24px'}} variants={fadeInUp}>LIVE INVENTORY</motion.p>
           <div className="stats-counters" style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', height: '100%', alignItems: 'start'}}>
             <motion.div className="counter-item" variants={fadeInUp} whileHover={{ y: -5, scale: 1.05 }}>
-              <span className="count">12</span>
+              <span className="count"><AnimatedText text="12" /></span>
               <span className="label">Homes Ready</span>
             </motion.div>
             <motion.div className="counter-item" variants={fadeInUp} whileHover={{ y: -5, scale: 1.05 }}>
-              <span className="count">8</span>
+              <span className="count"><AnimatedText text="8" /></span>
               <span className="label">Plots Available</span>
             </motion.div>
             <motion.div className="counter-item" variants={fadeInUp} whileHover={{ y: -5, scale: 1.05 }}>
@@ -299,7 +300,7 @@ export default function Home() {
         <motion.div variants={fadeInUp}>
           <h3>Trusted Realty</h3>
           <motion.div className="trust-card" whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
-            <img key={activeTab} src={tabImages[activeTab]} alt="Trusted property" className="fade-in-image" loading="lazy" />
+            <img key={activeTab} src={tabImages[activeTab]} alt="Trusted property" className="fade-in-image" />
             <div className="handshake">🤝</div>
           </motion.div>
         </motion.div>
@@ -335,7 +336,7 @@ export default function Home() {
         <article className="metric-card">
           <div className="metric-sub-left">
             <div className="label">{slides[currentSlide].leftLabel}</div>
-            <div className="value">{slides[currentSlide].leftValue}</div>
+            <div className="value"><AnimatedText text={slides[currentSlide].leftValue} /></div>
             {slides[currentSlide].renderLeftSupport()}
           </div>
         </article>
@@ -349,9 +350,9 @@ export default function Home() {
           <div className="bottom-row" style={{marginTop: 'auto', paddingTop: '32px'}}>
             <div>
               <div className="label">{slides[currentSlide].rightLabel}</div>
-              <div className="value">{slides[currentSlide].rightValue}</div>
+              <div className="value"><AnimatedText text={slides[currentSlide].rightValue} /></div>
             </div>
-            <div className="big-idx">{String(currentSlide + 1).padStart(2, '0')}</div>
+            <div className="big-idx"><AnimatedText text={String(currentSlide + 1).padStart(2, '0')} /></div>
           </div>
         </article>
       </motion.div>
@@ -380,7 +381,7 @@ export default function Home() {
       <div className="invest-grid">
         <motion.article className="prop-mini" variants={fadeInUp} whileHover={{ y: -5 }}>
           <h4>Profitable properties</h4>
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Commercial building" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Commercial building" />
           <p className="meta">Commercial &nbsp; 12,0999</p>
         </motion.article>
         <motion.div className="invest-copy" variants={fadeInUp}>
@@ -390,11 +391,11 @@ export default function Home() {
         </motion.div>
         <motion.article className="prop-mini" variants={fadeInUp} whileHover={{ y: -5 }}>
           <h4>Property listing</h4>
-          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" alt="Apartment listing" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80" alt="Apartment listing" />
         </motion.article>
       </div>
       <motion.div className="wide-shot" variants={fadeInUp}>
-        <img src="https://images.unsplash.com/photo-1600585153490-76fb20a32601?auto=format&fit=crop&w=1600&q=80" alt="Featured Sai Kripa home" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1600585153490-76fb20a32601?auto=format&fit=crop&w=1600&q=80" alt="Featured Sai Kripa home" />
       </motion.div>
     </motion.section>
 
@@ -410,20 +411,20 @@ export default function Home() {
       <motion.p variants={fadeInUp}>Experience a seamless and trusted real estate journey with us.</motion.p>
       <div className="disc-grid">
         <motion.article className="disc-card" variants={fadeInUp} whileHover={{ scale: 1.03 }}>
-          <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80" alt="Premium home" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80" alt="Premium home" />
           <div className="body">
             <h4>Premium Homes</h4>
             <div className="dot"></div>
           </div>
         </motion.article>
         <motion.article className="disc-card" variants={fadeInUp} whileHover={{ scale: 1.03 }}>
-          <img src="https://images.unsplash.com/photo-1600047509782-20d39509f26d?auto=format&fit=crop&w=800&q=80" alt="Modern tower home" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1600047509782-20d39509f26d?auto=format&fit=crop&w=800&q=80" alt="Modern tower home" />
           <div className="body">
             <p className="meta">Discover premium real estate options in prime locations, modern living.</p>
           </div>
         </motion.article>
         <motion.article className="disc-card" variants={fadeInUp} whileHover={{ scale: 1.03 }}>
-          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" alt="Evening villa" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" alt="Evening villa" />
           <div className="body">
             <h4>Profitable properties</h4>
             <p className="meta">Commercial &nbsp; 12,0999</p>

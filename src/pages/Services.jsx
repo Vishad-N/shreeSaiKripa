@@ -30,7 +30,7 @@ export default function Services() {
           </motion.div>
         </div>
         <motion.div className="page-hero-visual" variants={fadeInUp}>
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="City property" />
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="City property" fetchpriority="high" />
         </motion.div>
       </div>
     </motion.div>

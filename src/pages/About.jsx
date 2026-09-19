@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import AnimatedText from '../components/AnimatedCounter';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -45,10 +46,10 @@ export default function About() {
       <motion.h2 variants={fadeInUp}>A house is land and light.<br />A home is trust.</motion.h2>
       <motion.p variants={fadeInUp}>Named for grace received, Sai Kripa is a boutique real-estate house focused on residential, plotted, and select commercial work. We do not flood the market. We curate addresses that stay valuable when trends move on.</motion.p>
       <div className="stat-row">
-        <motion.div className="stat-box" variants={fadeInUp} whileHover={{ y: -5 }}><div className="num">18+</div><div className="lbl">Years of practice</div></motion.div>
-        <motion.div className="stat-box" variants={fadeInUp} whileHover={{ y: -5 }}><div className="num">320+</div><div className="lbl">Families placed</div></motion.div>
-        <motion.div className="stat-box" variants={fadeInUp} whileHover={{ y: -5 }}><div className="num">65%</div><div className="lbl">Residential focus</div></motion.div>
-        <motion.div className="stat-box" variants={fadeInUp} whileHover={{ y: -5 }}><div className="num">12</div><div className="lbl">Prime corridors</div></motion.div>
+        <motion.div className="stat-box" variants={fadeInUp} whileHover={{ y: -5 }}><div className="num"><AnimatedText text="18+" /></div><div className="lbl">Years of practice</div></motion.div>
+        <motion.div className="stat-box" variants={fadeInUp} whileHover={{ y: -5 }}><div className="num"><AnimatedText text="320+" /></div><div className="lbl">Families placed</div></motion.div>
+        <motion.div className="stat-box" variants={fadeInUp} whileHover={{ y: -5 }}><div className="num"><AnimatedText text="65%" /></div><div className="lbl">Residential focus</div></motion.div>
+        <motion.div className="stat-box" variants={fadeInUp} whileHover={{ y: -5 }}><div className="num"><AnimatedText text="12" /></div><div className="lbl">Prime corridors</div></motion.div>
       </div>
     </motion.div>
 
